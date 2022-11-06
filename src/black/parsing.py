@@ -265,6 +265,9 @@ def stringify_ast(node: Union[ast.AST, ast3.AST], depth: int = 0) -> Iterator[st
 
 def fixup_ast_constants(node: Union[ast.AST, ast3.AST]) -> Union[ast.AST, ast3.AST]:
     """Map ast nodes deprecated in 3.8 to Constant."""
+    if isinstance(node, (ast.Str, ast3.Str)) and ">>>" in node.value:
+        return ast.Constant(value="docstring with code")
+
     if isinstance(node, (ast.Str, ast3.Str, ast.Bytes, ast3.Bytes)):
         return ast.Constant(value=node.s)
 

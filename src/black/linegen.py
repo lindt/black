@@ -7,6 +7,7 @@ from typing import Collection, Iterator, List, Optional, Set, Union, cast
 
 from black.brackets import COMMA_PRIORITY, DOT_PRIORITY, max_delimiter_priority_in_atom
 from black.comments import FMT_OFF, generate_comments, list_comments
+from black.docstring import format
 from black.lines import (
     Line,
     append_leaves,
@@ -377,6 +378,9 @@ class LineGenerator(Visitor[Line]):
 
             # We could enforce triple quotes at this point.
             quote = quote_char * quote_len
+            docstring = format(
+                docstring, line=leaf.lineno, column=leaf.column, mode=self.mode
+            )
 
             # It's invalid to put closing single-character quotes on a new line.
             if Preview.long_docstring_quotes_on_newline in self.mode and quote_len == 3:

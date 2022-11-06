@@ -498,10 +498,8 @@ def main(  # noqa: C901
             user_level_config = str(find_user_pyproject_toml())
             if config == user_level_config:
                 out(
-                    (
-                        "Using configuration from user-level config at "
-                        f"'{user_level_config}'."
-                    ),
+                    "Using configuration from user-level config at "
+                    f"'{user_level_config}'.",
                     fg="blue",
                 )
             elif config_source in (
@@ -945,9 +943,9 @@ def validate_cell(src: str, mode: Mode) -> None:
     ``get_ipython().system('ls')``. However, if the cell originally contained
     ``get_ipython().system('ls')``, then it would get transformed in the same way:
 
-        >>> TransformerManager().transform_cell("get_ipython().system('ls')")
+    >>> TransformerManager().transform_cell("get_ipython().system('ls')")
         "get_ipython().system('ls')\n"
-        >>> TransformerManager().transform_cell("!ls")
+    >>> TransformerManager().transform_cell("!ls")
         "get_ipython().system('ls')\n"
 
     Due to the impossibility of safely roundtripping in such situations, cells
@@ -1054,15 +1052,15 @@ def format_str(src_contents: str, *, mode: Mode) -> str:
     A more complex example:
 
     >>> print(
-    ...   black.format_str(
-    ...     "def f(arg:str='')->None: hey",
-    ...     mode=black.Mode(
-    ...       target_versions={black.TargetVersion.PY36},
-    ...       line_length=10,
-    ...       string_normalization=False,
-    ...       is_pyi=False,
+    ...     black.format_str(
+    ...         "def f(arg:str='')->None: hey",
+    ...         mode=black.Mode(
+    ...             target_versions={black.TargetVersion.PY36},
+    ...             line_length=10,
+    ...             string_normalization=False,
+    ...             is_pyi=False,
+    ...         ),
     ...     ),
-    ...   ),
     ... )
     def f(
         arg: str = '',
